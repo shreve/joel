@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require_relative '../lib/app'
+
+require 'irb'
+
+$app = App.new
+
+def email
+  @email ||= EmailClient.new
+end
+
+def imap
+  @imap ||= email.instance_eval { @imap }
+end
+
+def db
+  @db ||= Database.new
+end
+
+IRB.start(__FILE__)
